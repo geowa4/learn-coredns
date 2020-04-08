@@ -1,0 +1,36 @@
+. {
+  forward . 1.1.1.3
+  prometheus :{$PROMETHEUS_PORT}
+  health :{$HEALTH_PORT}
+  ready :{$READINESS_PORT}
+  errors
+  log
+}
+
+version.bind version.server authors.bind hostname.bind id.server {
+    chaos
+}
+
+whoami.example.org {
+  ready :{$READINESS_PORT}
+  whoami
+}
+
+erratic.example.org {
+  ready :{$READINESS_PORT}
+  erratic {
+    delay 5 50ms
+    drop 3
+    truncate 7
+  }
+}
+
+test.rocdev.org {
+  ready :{$READINESS_PORT}
+  route53 test.rocdev.org.:Z07676352IM6GFL3KOX0Q {
+    credentials personal /aws-credentials
+    refresh 5m
+    fallthrough
+  }
+  file /db.test.rocdev.org
+}

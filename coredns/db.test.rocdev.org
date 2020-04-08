@@ -1,0 +1,27 @@
+@   IN  SOA     a      b (
+                          20     ; SERIAL
+                          7200   ; REFRESH
+                          600    ; RETRY
+                          3600000; EXPIRE
+                          60)    ; MINIMUM
+
+        NS      a.test.rocdev.org.
+        NS      b
+        NS      c
+        MX      10      b
+        MX      20      c
+
+a            IN  A      192.168.0.11
+
+b            IN  A      192.168.0.12
+
+c            IN  A      192.168.0.13
+
+foo          IN  A      192.168.0.14
+             IN  A      192.168.0.14
+
+www          IN  A      192.168.0.14
+
+mail         IN  A      192.168.0.17
+imap         IN  CNAME  mail
+

@@ -1,0 +1,34 @@
+---
+version: '3.7'
+services:
+  coredns:
+    build: ./coredns
+    ports:
+      - target: 53
+        published: 55553
+        protocol: tcp
+        mode: host
+      - target: 53
+        published: 55553
+        mode: host
+        protocol: udp
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: host
+      - target: 8181
+        published: 8181
+        protocol: tcp
+        mode: host
+      - target: 9153
+        published: 9153
+        protocol: tcp
+        mode: host
+    volumes:
+      - ~/.aws/credentials:/aws-credentials
+    networks:
+      - frontend
+
+networks:
+  frontend:
+
